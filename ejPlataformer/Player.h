@@ -8,6 +8,7 @@ class Player {
 private:
     int x;
     int y;
+    int anim_actual;
     Sprite sp;
 
 public:

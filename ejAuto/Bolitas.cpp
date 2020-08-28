@@ -37,7 +37,7 @@ int main() {
     if (!tex_ball.loadFromFile("ball.png"))
         return EXIT_FAILURE;
 
-    Auto player(0, 0, tex_auto);
+    Player player(0, 0, tex_auto);
 
     Ball bolitas[CANT_BOLITAS];
 
