@@ -8,6 +8,7 @@ class Player {
 private:
     int x;
     int y;
+    int vy;
     int anim_actual;
     Sprite sp;
 
@@ -17,6 +18,10 @@ public:
     void mover(int x, int y);
 
     void dibujar(RenderWindow &window);
+
+    int getX(){return x;};
+
+    int getY(){return y;};
 };
 
 

@@ -29,3 +29,4 @@ Player::Player(int x_inicial, int y_inicial, Texture &tex) {
     y = y_inicial;
     sp.setTexture(tex);
 }
+

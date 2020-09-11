@@ -1,31 +1,39 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Mapa.h"
+#include "Proyectil.h"
+#include "Arreglo.h"
 #include <iostream>
 
 using namespace sf;
 
 int main() {
-    float ruta_y = 0;
     // Create the main window
     RenderWindow window(VideoMode(320, 160), "Mi Prog");
     // Load a sprite to display
-    Texture tex_auto;
-    if (!tex_auto.loadFromFile("player.png")) {
-        std::cout << "No se puedo cargar auto.png, verifique el WorkinDir" << std::endl;
+    Texture tex_player;
+    if (!tex_player.loadFromFile("player.png")) {
+        std::cout << "No se puedo cargar player.png, verifique el WorkinDir" << std::endl;
         return EXIT_FAILURE;
-    }
-    Texture tex_ruta;
-    if (!tex_ruta.loadFromFile("mapa.png")) {
-        std::cout << "No se puedo cargar ruta.png, verifique el WorkinDir" << std::endl;
+    }    // Load a sprite to display
+
+    Texture tex_proyectil;
+    if (!tex_proyectil.loadFromFile("proyectil.png")) {
+        std::cout << "No se puedo cargar proyectil.png, verifique el WorkinDir" << std::endl;
         return EXIT_FAILURE;
     }
 
-    Player player(0, 0, tex_auto);
+    Player player(0, 0, tex_player);
+
+    Arreglo proy;
+    for (int i = 0; i < proy.getSize(); i++) {
+        proy.setProyectil(i, nullptr);
+    }
+
     Mapa map("mapa.txt");
 
 
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
     // Start the game loop
     while (window.isOpen()) {
         // Process events
@@ -51,19 +59,43 @@ int main() {
         if (Keyboard::isKeyPressed(Keyboard::Down)) {
             player.mover(0, 5);
         }
-
-        ruta_y += 3.5;
-
-        if (ruta_y > tex_ruta.getSize().y) {
-            ruta_y -= tex_ruta.getSize().y;
+        if (Keyboard::isKeyPressed(Keyboard::Space)) {
+            int i;
+            for (i = 0; i < proy.getSize(); ++i) {
+                if (proy.getProyectil(i) == nullptr) {
+                    Proyectil *tmp = new Proyectil(player.getX() + 32, player.getY() + 5, tex_proyectil);
+                    proy.setProyectil(i, tmp);
+                    break;
+                }
+            }
+            if (i == proy.getSize()) { // me quedé sin lugar, duplico.
+                proy.duplicar();
+                Proyectil *tmp = new Proyectil(player.getX() + 32, player.getY() + 5, tex_proyectil);
+                proy.setProyectil(i, tmp);
+            }
         }
 
+        for (int i = 0; i < proy.getSize(); ++i) {
+            if (proy.getProyectil(i) != nullptr) {
+                if (proy.getProyectil(i)->mover()) {
+                    delete proy.getProyectil(i);
+                    proy.setProyectil(i, nullptr);
+                }
+            }
+        }
 
         // Clear screen
         window.clear();
         // Draw the sprite
         map.dibujar(window);
         player.dibujar(window);
+
+        for (int i = 0; i < proy.getSize(); ++i) {
+            if (proy.getProyectil(i) != nullptr) {
+                proy.getProyectil(i)->dibujar(window);
+            }
+        }
+
         // Update the window
         window.display();
     }

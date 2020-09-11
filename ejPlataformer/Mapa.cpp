@@ -1,7 +1,3 @@
-//
-// Created by martin on 28/8/20.
-//
-
 #include "Mapa.h"
 #include <fstream>
 

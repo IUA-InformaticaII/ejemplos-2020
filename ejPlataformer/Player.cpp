@@ -4,9 +4,9 @@
 
 #include "Player.h"
 
-void Player::mover(int x, int y) {
+void Player::mover(int x, int vy) {
     this->x += x;
-    this->y += y;
+    this->vy += vy;
 
     if (this->x < 0)
         this->x = 0;
@@ -20,11 +20,24 @@ void Player::mover(int x, int y) {
 }
 
 void Player::dibujar(RenderWindow &window) {
+
+    // Gravedad
+
+    // vf = vo + a * T
+    // yf = yi + vi * t + (a * t^2)/2
+    float g = 1;
+
+    vy = vy + g;
+    y = y + vy + g / 2;
+    if (y > 160 - 64) {
+        y = 160 - 64;
+        vy = 0;
+    }
+
     sp.setPosition(this->x, this->y);
 
     anim_actual++;
-    if (anim_actual > 7)
-        anim_actual = 0;
+    anim_actual = anim_actual % 8;
 
     sp.setTextureRect({anim_actual * 32, 0, 32, 32});
     window.draw(sp);
@@ -34,5 +47,6 @@ Player::Player(int x_inicial, int y_inicial, Texture &tex) {
     anim_actual = 0;
     x = x_inicial;
     y = y_inicial;
+    vy = 0;
     sp.setTexture(tex);
 }
