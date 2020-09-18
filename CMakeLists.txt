@@ -14,6 +14,10 @@ add_executable(Archivos5 Clase3/main5.cpp)
 add_executable(Archivos6 Clase3/main6.cpp)
 add_executable(EjemploPtr Clase5/ejPuntero.cpp)
 
+
+add_executable(potencia Clase6/potencia.cpp)
+add_executable(fibonacci Clase6/fibonacci.cpp)
+
 add_executable(Bolitas ejAuto/Bolitas.cpp ejAuto/Auto.cpp ejAuto/Auto.h ejAuto/Ball.cpp ejAuto/Ball.h)
 target_link_libraries(Bolitas sfml-system sfml-window sfml-graphics sfml-audio)
 
@@ -22,3 +26,14 @@ target_link_libraries(ejMapa sfml-system sfml-window sfml-graphics sfml-audio)
 
 add_executable(ejPlataformer ejPlataformer/ejPlataformer.cpp ejPlataformer/Player.cpp ejPlataformer/Mapa.cpp ejPlataformer/Proyectil.cpp ejPlataformer/Proyectil.h ejPlataformer/Arreglo.cpp ejPlataformer/Arreglo.h)
 target_link_libraries(ejPlataformer sfml-system sfml-window sfml-graphics sfml-audio)
+
+
+
+
+# Laberinto
+find_package( Threads )
+
+add_executable(extraLaberinto Extra-Laberinto/main.cpp Extra-Laberinto/LaberintoSolver.cpp Extra-Laberinto/MazeGenerator.cpp)
+target_link_libraries(extraLaberinto ${CMAKE_THREAD_LIBS_INIT} sfml-system sfml-window sfml-graphics sfml-audio)
+
+file(COPY Extra-Laberinto/tileLab.png DESTINATION ${CMAKE_BINARY_DIR}/)
