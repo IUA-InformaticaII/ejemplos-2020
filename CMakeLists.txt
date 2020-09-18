@@ -12,6 +12,7 @@ add_executable(Archivos3 Clase3/main3.cpp)
 add_executable(Archivos4 Clase3/main4.cpp)
 add_executable(Archivos5 Clase3/main5.cpp)
 add_executable(Archivos6 Clase3/main6.cpp)
+add_executable(QuickSort Clase7/quicksort.cpp)
 add_executable(EjemploPtr Clase5/ejPuntero.cpp)
 
 
@@ -28,10 +29,8 @@ add_executable(ejPlataformer ejPlataformer/ejPlataformer.cpp ejPlataformer/Playe
 target_link_libraries(ejPlataformer sfml-system sfml-window sfml-graphics sfml-audio)
 
 
-
-
 # Laberinto
-find_package( Threads )
+find_package(Threads)
 
 add_executable(extraLaberinto Extra-Laberinto/main.cpp Extra-Laberinto/LaberintoSolver.cpp Extra-Laberinto/MazeGenerator.cpp)
 target_link_libraries(extraLaberinto ${CMAKE_THREAD_LIBS_INIT} sfml-system sfml-window sfml-graphics sfml-audio)

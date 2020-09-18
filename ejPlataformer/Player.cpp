@@ -20,7 +20,7 @@ void Player::mover(int x, int vy) {
 }
 
 void Player::dibujar(RenderWindow &window) {
-
+    static int delay = 0;
     // Gravedad
 
     // vf = vo + a * T
@@ -36,8 +36,12 @@ void Player::dibujar(RenderWindow &window) {
 
     sp.setPosition(this->x, this->y);
 
-    anim_actual++;
-    anim_actual = anim_actual % 8;
+    delay++;
+    if (delay >= 30) {
+        delay = 0;
+        anim_actual++;
+        anim_actual = anim_actual % 8;
+    }
 
     sp.setTextureRect({anim_actual * 32, 0, 32, 32});
     window.draw(sp);
