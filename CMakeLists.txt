@@ -16,6 +16,7 @@ add_executable(QuickSort Clase7/quicksort.cpp)
 add_executable(EjemploPtr Clase5/ejPuntero.cpp)
 add_executable(Repaso2 Clase8/Repaso2.cpp)
 add_executable(Repaso2.1 Clase8/Repaso2.1.cpp)
+add_executable(Rasdf Clase8/ptr.cpp)
 
 
 add_executable(potencia Clase6/potencia.cpp)
