@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Mapa.h"
 #include "Proyectil.h"
-#include "Arreglo.h"
+#include "../Lista/LinkedList.h"
 #include <iostream>
 
 using namespace sf;
@@ -25,13 +25,9 @@ int main() {
 
     Player player(0, 0, tex_player);
 
-    Arreglo proy;
-    for (int i = 0; i < proy.getSize(); i++) {
-        proy.setProyectil(i, nullptr);
-    }
+    LinkedList<Proyectil *> proy;
 
     Mapa map("mapa.txt");
-
 
     window.setFramerateLimit(30);
     // Start the game loop
@@ -59,28 +55,15 @@ int main() {
         if (Keyboard::isKeyPressed(Keyboard::Down)) {
             player.mover(0, 5);
         }
-        if (Keyboard::isKeyPressed(Keyboard::Space)) {
-            int i;
-            for (i = 0; i < proy.getSize(); ++i) {
-                if (proy.getProyectil(i) == nullptr) {
-                    Proyectil *tmp = new Proyectil(player.getX() + 32, player.getY() + 5, tex_proyectil);
-                    proy.setProyectil(i, tmp);
-                    break;
-                }
-            }
-            if (i == proy.getSize()) { // me quedé sin lugar, duplico.
-                proy.duplicar();
-                Proyectil *tmp = new Proyectil(player.getX() + 32, player.getY() + 5, tex_proyectil);
-                proy.setProyectil(i, tmp);
-            }
+        if (Keyboard::isKeyPressed(Keyboard::Space)) { // Disparo y creo un nuevo proyectil
+            proy.push_front(new Proyectil(player.getX() + 32, player.getY() + 5, tex_proyectil));
         }
 
-        for (int i = 0; i < proy.getSize(); ++i) {
-            if (proy.getProyectil(i) != nullptr) {
-                if (proy.getProyectil(i)->mover()) {
-                    delete proy.getProyectil(i);
-                    proy.setProyectil(i, nullptr);
-                }
+        // Movemos todos los proyectiles y borramos si se salen de la pantalla
+
+        for (int i = 0; i < proy.size(); ++i) {
+            if (proy.get(i)->mover()) {
+                proy.erase(i);
             }
         }
 
@@ -90,10 +73,8 @@ int main() {
         map.dibujar(window);
         player.dibujar(window);
 
-        for (int i = 0; i < proy.getSize(); ++i) {
-            if (proy.getProyectil(i) != nullptr) {
-                proy.getProyectil(i)->dibujar(window);
-            }
+        for (proy.loopStart(); !proy.loopEnd(); proy.loopNext()) {
+            proy.loopGet()->dibujar(window);
         }
 
         // Update the window

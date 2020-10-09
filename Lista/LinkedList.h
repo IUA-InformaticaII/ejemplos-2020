@@ -7,6 +7,7 @@ template<typename T>
 class LinkedList {
 private:
     Node<T> *head;
+    Node<T> *loopActual;
 
     Node<T> *getNode(int pos);
 
@@ -38,9 +39,17 @@ public:
     unsigned int size() {
         return list_size;
     }
+
+    void loopStart() { loopActual = head; }
+
+    void loopNext() { loopActual = loopActual->getNext(); }
+
+    T loopGet() { return loopActual->getData(); }
+
+    bool loopEnd(){ return loopActual == nullptr; }
 };
 
-template <typename T>
+template<typename T>
 LinkedList<T>::LinkedList() {
     head = nullptr;
     list_size = 0;
@@ -128,7 +137,7 @@ void LinkedList<T>::erase(int pos) {
     list_size--;
 }
 
-template <typename T>
+template<typename T>
 T LinkedList<T>::find(T dato) {
     auto aux = head;
 
