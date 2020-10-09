@@ -3,15 +3,20 @@
 
 using namespace std;
 
+class Car{
+
+};
+
+
 int main() {
-    LinkedList ll;
+    LinkedList<float> ll;
 
     // 7 5 30 4
     // 0 1 2  3
 
     ll.insert(0, 5);
     ll.insert(1, 4);
-    ll.insert(1, 30);
+    ll.insert(1, 30.300);
     ll.insert(0, 7);
 
     try {

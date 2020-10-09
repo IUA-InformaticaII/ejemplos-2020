@@ -1,17 +1,19 @@
 #ifndef INFO2_2020_NODE_H
 #define INFO2_2020_NODE_H
 
+//   TEMPLATES
 
+template <typename T>
 class Node {
 private:
-    int data;
+    T data;
     Node *next;
 public:
-    int getData() {
+    T getData() {
         return data;
     }
 
-    void setData(int d) {
+    void setData(T d) {
         data = d;
     }
 
