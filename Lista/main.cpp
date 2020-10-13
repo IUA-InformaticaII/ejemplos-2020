@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Car{
+class Car {
 
 };
 
@@ -19,8 +19,11 @@ int main() {
     ll.insert(1, 30.300);
     ll.insert(0, 7);
 
+    LinkedList<float> ll2 = ll;
+
     try {
         cout << ll.get(2) << endl;
+        cout << ll2.get(2) << endl;
     } catch (...) {
         cout << "no andó" << endl;
     }
