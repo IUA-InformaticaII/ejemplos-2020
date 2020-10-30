@@ -216,31 +216,6 @@ LinkedList<T>::~LinkedList() {
     }
 }
 
-template<typename T>
-LinkedList<T>::LinkedList(const LinkedList<T> &org) {
-    Node<T> *aux, *orgAux = org.head;
-
-    // La original está vacia?
-    if (org.head == nullptr) {
-        head == nullptr;
-        return;
-    }
-
-    // Copio el nodo head de la original
-    head = new Node<T>;
-    head->setData(org.head->getData());
-    aux = head;
-
-    // Copio cada uno de los nodos
-    while (orgAux->getNext() != nullptr) {
-        orgAux = orgAux->getNext();
-        aux->setNext(new Node<T>);
-        aux = aux->getNext();
-        aux->setData(orgAux->getData());
-        list_size++; // Incremento el size de la lista actual.
-    }
-    aux->setNext(nullptr); // Finalizo la lista con null.
-}
 
 
 #endif //INFO2_2020_LINKEDLIST_H

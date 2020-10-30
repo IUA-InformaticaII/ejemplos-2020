@@ -1,8 +1,10 @@
 #ifndef INFO2_2020_NODE_H
 #define INFO2_2020_NODE_H
 
-//   TEMPLATES
-
+/**
+ * Clase Nodo utilizada en la lista enlazada
+ * @tparam T
+ */
 template <typename T>
 class Node {
 private:
