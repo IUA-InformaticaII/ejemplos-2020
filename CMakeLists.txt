@@ -18,8 +18,13 @@ add_executable(Repaso2 Clase8/Repaso2.cpp)
 add_executable(Repaso2.1 Clase8/Repaso2.1.cpp)
 add_executable(Rasdf Clase8/ptr.cpp)
 
+add_executable(EJ3 Clase13/main.cpp)
 
-add_executable(MainLista Lista/main.cpp Lista/LinkedList.cpp)
+
+add_executable(MainLista Estructuras/Lista/main.cpp Estructuras/Lista/LinkedList.cpp)
+
+add_executable(MainQueue Estructuras/Colas/main.cpp)
+add_executable(MainPila Estructuras/Pila/main.cpp Estructuras/Pila/Stack.h)
 
 
 add_executable(potencia Clase6/potencia.cpp)
